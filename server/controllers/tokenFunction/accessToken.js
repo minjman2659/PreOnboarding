@@ -4,6 +4,7 @@ const { sign, verify } = require('jsonwebtoken');
 module.exports = {
   generateAccessToken: (data) => {
     // Access token 생성
+    console.log('secret:', process.env.ACCESS_SECRET);
     return sign(data, process.env.ACCESS_SECRET, { expiresIn: '2h' });
   },
   isAuthorized: (req) => {

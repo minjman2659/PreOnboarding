@@ -22,7 +22,7 @@ app.use(
 );
 
 app.use('/users', usersRouter);
-app.use('/boards', boardsRouter);
+// app.use('/boards', boardsRouter);
 
 app.get('/', (req, res) => {
   res.send('Hello World!');
