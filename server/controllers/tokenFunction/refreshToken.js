@@ -1,9 +1,10 @@
 require('dotenv').config();
 const { sign, verify } = require('jsonwebtoken');
+const secretKey = process.env.REFRESH_SECRET || 'tempKey';
 
 module.exports = {
   generateRefreshToken: (data) => {
-    return sign(data, process.env.REFRESH_SECRET, { expiresIn: '30d' });
+    return sign(data, secretKey, { expiresIn: '30d' });
   },
   sendRefreshToken: (res, refreshToken) => {
     // JWT 토큰을 쿠키로 전달합니다.
@@ -29,7 +30,7 @@ module.exports = {
       return false;
     } else {
       try {
-        const tokenCheck = verify(token, process.env.REFRESH_SECRET);
+        const tokenCheck = verify(token, secretKey);
         if (!tokenCheck) return false;
         return tokenCheck;
       } catch (error) {

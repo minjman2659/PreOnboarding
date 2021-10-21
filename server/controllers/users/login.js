@@ -17,7 +17,7 @@ module.exports = {
       if (!comparePwd(password, userInfo[0].password)) {
         res.status(401).json({ message: 'Wrong Password' });
       } else {
-        let returnUserInfo = userInfo[0];
+        let returnUserInfo = Object.assign({}, userInfo[0]);
         delete returnUserInfo.password;
         const accessToken = generateAccessToken(returnUserInfo);
         const refreshToken = generateRefreshToken(returnUserInfo);

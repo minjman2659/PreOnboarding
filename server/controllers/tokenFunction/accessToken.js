@@ -1,11 +1,12 @@
-require('dotenv').config();
+const dotenv = require('dotenv');
+dotenv.config();
 const { sign, verify } = require('jsonwebtoken');
+const secretKey = process.env.ACCESS_SECRET || 'tempKey';
 
 module.exports = {
   generateAccessToken: (data) => {
     // Access token 생성
-    console.log('secret:', process.env.ACCESS_SECRET);
-    return sign(data, process.env.ACCESS_SECRET, { expiresIn: '2h' });
+    return sign(data, secretKey, { expiresIn: '2h' });
   },
   isAuthorized: (req) => {
     // JWT 토큰 검증
@@ -17,7 +18,7 @@ module.exports = {
       return false;
     } else {
       try {
-        const tokenCheck = verify(token, process.env.ACCESS_SECRET);
+        const tokenCheck = verify(token, secretKey);
         if (!tokenCheck) return false;
         return tokenCheck;
       } catch (error) {

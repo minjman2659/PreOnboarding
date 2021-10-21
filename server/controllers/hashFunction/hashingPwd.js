@@ -10,7 +10,6 @@ module.exports = {
 
   comparePwd: (decryptedPwd, encryptedPwd) => {
     const compare = bcrypt.compareSync(decryptedPwd, encryptedPwd);
-    console.log('비교:', compare);
     return compare; // boolean
   },
 };
