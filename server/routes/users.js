@@ -6,6 +6,7 @@ const { usersController } = require('../controllers/index');
 router.post('/signup', usersController.signup.post);
 router.get('/:email/check', usersController.emailCheck.get);
 router.post('/login', usersController.login.post);
+router.post('/guest-login', usersController.guestLogin.post);
 router.post('/logout', usersController.logout.post);
 
 module.exports = router;
