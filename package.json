@@ -4,7 +4,8 @@
   "description": "PreOnboarding Server",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js",
+    "start": "node server/app.js",
+    "nodemon": "nodemon server/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -13,7 +14,8 @@
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
     "express": "^4.17.1",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.14"
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
