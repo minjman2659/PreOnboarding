@@ -38,7 +38,7 @@ Github Repository를 clone 한 후, <br/>`npm install` 명령어를 통해 필�
 \*JWT Secret key는 임시 키로 코드상에 구현해 놓았으니 별도로 .env 파일을 만들지 않아도 됩니다. <br/>
 
 **로그인 이전 할 수 있는 기능** <br/>
-회원가입(POST), 이메일 중복 체크(GET), 새로운 글 작성(POST), 글 조회(GET), 전체 글 목록 조회(GET)
+회원가입(POST), 이메일 중복 체크(GET), 글 조회(GET), 전체 글 목록 조회(GET)
 <br/>
 
 **로그인 기능 (POST)** <br/>
@@ -46,7 +46,8 @@ Github Repository를 clone 한 후, <br/>`npm install` 명령어를 통해 필�
 <br/>
 
 **로그인 이후 할 수 있는 기능** <br/>
-새로운 글 작성(POST), 내가 쓴 글 목록 조회(GET), 내가 쓴 글 수정(PATCH), 내가 쓴 글 삭제(DELETE), 로그아웃(POST)
+게스트 로그인 : 새로운 글 작성(POST), 로그아웃(POST) <br/>
+유저 로그인 : 새로운 글 작성(POST), 내가 쓴 글 목록 조회(GET), 내가 쓴 글 수정(PATCH), 내가 쓴 글 삭제(DELETE), 로그아웃(POST)
 <br/>
 
 **API에 대한 자세한 내용은 [Git Book](https://minjman2659.gitbook.io/preonboarding-api/) 을 통해 더 자세하게 확인 할 수 있습니다.** <br/>
