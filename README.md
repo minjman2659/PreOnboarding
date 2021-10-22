@@ -36,6 +36,7 @@ usersList와 boardsList는 1:N 관계
 Github Repository를 clone 한 후, <br/>`npm install` 명령어를 통해 필요한 npm 모듈을 설치합니다. <br/>
 이후, `npm run start` 혹은 `npm run nodemon` 명령어를 통해 서버를 실행시킬 수 있습니다. <br/>
 \*JWT Secret key는 임시 키로 코드상에 구현해 놓았으니 별도로 .env 파일을 만들지 않아도 됩니다. <br/>
+서버 url : http://localhost:4000 <br/>
 
 **로그인 이전 할 수 있는 기능** <br/>
 회원가입(POST), 이메일 중복 체크(GET), 글 조회(GET), 전체 글 목록 조회(GET)
