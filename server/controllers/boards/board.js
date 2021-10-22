@@ -1,4 +1,4 @@
-let boardsList = require('../../models/boardsList');
+const boardsList = require('../../models/boardsList');
 const {
   isAuthorized,
   generateAccessToken,
@@ -122,7 +122,12 @@ module.exports = {
           if (findBoard[0].userId !== Number(userId)) {
             res.status(403).json({ message: 'Forbidden Request' });
           } else {
-            boardsList = boardsList.filter((el) => el.id !== Number(id));
+            for (let i = 0; i < boardsList.length; i++) {
+              if (boardsList[i].id === Number(id)) {
+                boardsList.splice(i, 1);
+                break;
+              }
+            }
             res.status(201).json({ accessToken, message: 'OK' });
           }
         }
@@ -138,7 +143,12 @@ module.exports = {
         if (findBoard[0].userId !== Number(userId)) {
           res.status(403).json({ message: 'Forbidden Request' });
         } else {
-          boardsList = boardsList.filter((el) => el.id !== Number(id));
+          for (let i = 0; i < boardsList.length; i++) {
+            if (boardsList[i].id === Number(id)) {
+              boardsList.splice(i, 1);
+              break;
+            }
+          }
           res.status(200).json({ message: 'OK' });
         }
       }
