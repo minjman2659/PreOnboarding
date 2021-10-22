@@ -13,7 +13,7 @@ module.exports = {
     if (userInfo.length === 0) {
       res.status(401).json({ message: 'Wrong Email' });
     } else {
-      console.log(userInfo[0]);
+      // console.log(userInfo[0]);
       if (!comparePwd(password, userInfo[0].password)) {
         res.status(401).json({ message: 'Wrong Password' });
       } else {

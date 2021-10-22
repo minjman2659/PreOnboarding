@@ -1,4 +1,4 @@
-const boardsList = require('../../models/boardsList');
+let boardsList = require('../../models/boardsList');
 const {
   isAuthorized,
   generateAccessToken,
@@ -8,6 +8,16 @@ const { refreshAuthorized } = require('../tokenFunction/refreshToken');
 module.exports = {
   post: (req, res) => {
     const { title, userId, username, body } = req.body;
+    if (!userId || !username) {
+      return res.status(403).json({
+        message: '로그인 또는 게스트 로그인 후에 작성할 수 있습니다.',
+      });
+    }
+    if (!title || !body) {
+      return res.status(403).json({
+        message: '제목과 내용을 모두 작성해야 합니다.',
+      });
+    }
     let newBoardId = boardsList.length + 1;
     const newBoard = {
       id: newBoardId,
@@ -22,7 +32,7 @@ module.exports = {
 
   get: (req, res) => {
     const { id } = req.params;
-    const findBoard = boardsList.filter((el) => el.id === id);
+    const findBoard = boardsList.filter((el) => el.id === Number(id));
     if (findBoard.length === 0) {
       res.status(403).json({ message: '존재하는 글을 조회해야 합니다!' });
     } else {
@@ -44,16 +54,16 @@ module.exports = {
       else {
         delete refreshTokenCheck.exp;
         const accessToken = generateAccessToken(refreshTokenCheck);
-        const findBoard = boardsList.filter((el) => el.id === id);
+        const findBoard = boardsList.filter((el) => el.id === Number(id));
         if (findBoard.length === 0) {
           res.status(403).json({ message: '존재하는 글을 수정해야 합니다!' });
         } else {
-          if (findBoard[0].userId !== userId) {
+          if (findBoard[0].userId !== Number(userId)) {
             res.status(403).json({ message: 'Forbidden Request' });
           } else {
             let updatedBoard = req.body;
             for (let i = 0; i < boardsList.length; i++) {
-              if (boardsList[i].id === id) {
+              if (boardsList[i].id === Number(id)) {
                 updatedBoard = {
                   ...boardsList[i],
                   ...updatedBoard,
@@ -68,16 +78,16 @@ module.exports = {
     }
     // accessToken 유효 (200)
     else {
-      const findBoard = boardsList.filter((el) => el.id === id);
+      const findBoard = boardsList.filter((el) => el.id === Number(id));
       if (findBoard.length === 0) {
-        res.status(403).json({ message: '존재하는 글을 수정해야 합니다.' });
+        res.status(403).json({ message: '존재하는 글을 수정해야 합니다!' });
       } else {
-        if (findBoard[0].userId !== userId) {
+        if (findBoard[0].userId !== Number(userId)) {
           res.status(403).json({ message: 'Forbidden Request' });
         } else {
           let updatedBoard = req.body;
           for (let i = 0; i < boardsList.length; i++) {
-            if (boardsList[i].id === id) {
+            if (boardsList[i].id === Number(id)) {
               updatedBoard = {
                 ...boardsList[i],
                 ...updatedBoard,
@@ -105,14 +115,14 @@ module.exports = {
         delete refreshTokenCheck.exp;
         const accessToken = generateAccessToken(refreshTokenCheck);
         const userId = refreshTokenCheck.id;
-        const findBoard = boardsList.filter((el) => el.id === id);
+        const findBoard = boardsList.filter((el) => el.id === Number(id));
         if (findBoard.length === 0) {
           res.status(403).json({ message: '존재하는 글을 삭제해야 합니다!' });
         } else {
-          if (findBoard[0].userId !== userId) {
+          if (findBoard[0].userId !== Number(userId)) {
             res.status(403).json({ message: 'Forbidden Request' });
           } else {
-            boardsList = boardsList.filter((el) => el.id !== id);
+            boardsList = boardsList.filter((el) => el.id !== Number(id));
             res.status(201).json({ accessToken, message: 'OK' });
           }
         }
@@ -121,14 +131,14 @@ module.exports = {
     // accessToken 유효 (200)
     else {
       const userId = accessTokenCheck.id;
-      const findBoard = boardsList.filter((el) => el.id === id);
+      const findBoard = boardsList.filter((el) => el.id === Number(id));
       if (findBoard.length === 0) {
         res.status(403).json({ message: '존재하는 글을 삭제해야 합니다!' });
       } else {
-        if (findBoard[0].userId !== userId) {
+        if (findBoard[0].userId !== Number(userId)) {
           res.status(403).json({ message: 'Forbidden Request' });
         } else {
-          boardsList = boardsList.filter((el) => el.id !== id);
+          boardsList = boardsList.filter((el) => el.id !== Number(id));
           res.status(200).json({ message: 'OK' });
         }
       }

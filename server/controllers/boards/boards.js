@@ -1,5 +1,5 @@
 const usersList = require('../../models/usersList');
-const boardsList = require('../../models/boardsList');
+let boardsList = require('../../models/boardsList');
 const {
   generateAccessToken,
   isAuthorized,
